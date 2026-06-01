@@ -38,7 +38,7 @@ AuraComply generates deterministic, mathematically verifiable reports that audit
 
 The report below is a live output from the AuraComply audit kernel. It covers three compliance pillars in a single document:
 
-📥 **→ Download Sample: [AuraComply_Compliance_Report_Sample.pdf](docs/AuraComply_Compliance_Report_Sample.pdf)**
+📥 **→ Download Sample: [AuraComply_Compliance_Report_Sample.pdf](https://raw.githubusercontent.com/Wagnerdata/AuraComply-Overview/main/docs/AuraComply_Compliance_Report_Sample.pdf)**
 
 ```text
 ================================================================================
