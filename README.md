@@ -155,4 +155,4 @@ Developed with AI coding assistance (Claude Code); every change reviewed and app
 | | |
 | --- | --- |
 | 📩 Email | waglex@gmail.com |
-| 💼 LinkedIn | [linkedin.com/in/wagner-campos-0699211a](https://www.linkedin.com/in/wagner-campos-0699211a/) |
+| 💼 LinkedIn | [linkedin.com/in/wagnercamposdata](https://www.linkedin.com/in/wagnercamposdata/) |
