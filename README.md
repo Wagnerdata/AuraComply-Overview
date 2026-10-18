@@ -112,12 +112,12 @@ The sample was generated on 2026-10-16 from a local development build, before th
 
 ## Regulatory context
 
-AuraComply produces evidence relevant to these obligations; whether an organisation meets them is for that organisation and its auditors to assess.
+AuraComply produces evidence relevant to these obligations; whether an organisation meets them is for that organisation and its auditors to assess. Every citation was checked against the official text on EUR-Lex.
 
 | Framework | Where the evidence helps |
 | --- | --- |
-| **EU AI Act** | Art. 12 (automatic recording of events for high-risk systems) and Art. 14 (human oversight): decision and oversight events sealed with model identity and input hashes. |
-| **DORA** (Reg. (EU) 2022/2554) | Art. 9 and Art. 12, detailed by Delegated Reg. (EU) 2024/1774 (integrity of data, logging, restoration); incident-lifecycle events for classification (Art. 18) and reporting (Art. 19); resilience-testing records. |
+| **EU AI Act** | Art. 12 (automatic recording of events for high-risk systems) and Art. 14 (human oversight): decision and oversight events sealed with model identity and input hashes. Art. 19(1) and 26(6) (providers and deployers keep these logs for at least six months): append-only storage; the retention period itself is the operator's policy. |
+| **DORA** (Reg. (EU) 2022/2554) | Art. 9(4)(a) and Art. 12, detailed by Delegated Reg. (EU) 2024/1774 Art. 12 (integrity of data, logs protected against tampering and deletion, restoration); incident-lifecycle events for management (Art. 17), classification (Art. 18) and reporting (Art. 19); resilience-testing records (Art. 24–27). |
 | **GDPR** | Art. 32(1)(b): evidence that audit records were not altered; no personal data in the chain by design. |
 
 **Timeline.** EU AI Act high-risk obligations, as amended by the Digital Omnibus on AI (Regulation (EU) 2026/1744, OJ 24 July 2026, in force since 27 July 2026), apply from 2 December 2027 (Annex III systems, e.g. credit scoring, employment, critical infrastructure) and 2 August 2028 (Annex I, AI in regulated products). DORA has applied since 17 January 2025.
@@ -128,7 +128,7 @@ AuraComply produces evidence relevant to these obligations; whether an organisat
 
 ## Engineering governance log
 
-Findings from the review of 2026-10-18, each fixed with a regression test that fails on the old code. Recorded here because how defects are found and closed is part of the evidence a governance tool should offer.
+Findings from the review of 2026-10-18, each fixed with a regression test that fails on the old code (row 11: a test that fails on the old text). Recorded here because how defects are found and closed is part of the evidence a governance tool should offer.
 
 | # | Finding | Impact | Fix | Status |
 | --- | --- | --- | --- | --- |
@@ -141,6 +141,8 @@ Findings from the review of 2026-10-18, each fixed with a regression test that f
 | 7 | The release workflow built, signed and published any version tag, without running tests. | An untested image could be published, and its signature cannot be withdrawn from the public transparency log. | Release gate: only commits on `main`, only after the full test suites pass in the same run. | Merged |
 | 8 | Tests that did not run in CI: the API-contract tests could skip silently, the SDK suite and its 95 % coverage gate never ran, and branches without a pull request got no CI. | Green CI that did not check what it appeared to check. | Contract-test dependency made mandatory; SDK job with coverage gate; CI on every pushed branch. | Merged |
 | 9 | A newer database library changed its default driver. | Fresh container builds failed at start-up. | Dependency pinned; dependency lock file planned. | Merged |
+| 10 | The web container received the PostgreSQL superuser password, used only by the two verification endpoints. | Anyone able to inspect the container could read a credential that bypasses tenant isolation and can alter any record. | Verification runs under the application role with row-level security, like every other endpoint; a real-database test proves one tenant cannot see or verify another's rows, and that the role cannot update or delete audit records. The password is rotated on the next deployment. | Merged |
+| 11 | The documentation cited DORA Art. 9(4)(c) as the audit-trail requirement and AI Act Art. 13 for traceability. | Art. 9(4)(c) is about access control, and traceability is Art. 12: wrong citations in a governance tool undermine the evidence. | Citations checked against EUR-Lex in one regulatory map; a test blocks the known miscitations. | In review |
 
 ---
 
