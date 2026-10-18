@@ -1,0 +1,3 @@
+# Normalise text to LF in the repository; binaries untouched.
+* text=auto
+*.pdf binary
