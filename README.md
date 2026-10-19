@@ -128,7 +128,7 @@ AuraComply produces evidence relevant to these obligations; whether an organisat
 
 ## Engineering governance log
 
-Findings from the review of 2026-10-18, each fixed with a regression test that fails on the old code (row 11: a test that fails on the old text). Recorded here because how defects are found and closed is part of the evidence a governance tool should offer.
+Findings from the reviews of 18 and 19 October 2026, each fixed with a regression test that fails on the old code (row 11: a test that fails on the old text). Recorded here because how defects are found and closed is part of the evidence a governance tool should offer.
 
 | # | Finding | Impact | Fix | Status |
 | --- | --- | --- | --- | --- |
